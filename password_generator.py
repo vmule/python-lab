@@ -1,4 +1,7 @@
 import random
+from datetime import datetime
+
+random.seed(datetime.now())
 
 def getChar():
     char = chr(random.randint(97, 122))
