@@ -15,10 +15,6 @@ while lines_num > 1:
   file.seek(position)
   lines = file.readlines()
   for i in lines:
-    #print lines
-    #print "line" , len(i)
-    #print "lines_num", lines_num
-    #print "position", position
     if len(i) <= 1:
       pass
     elif lines_num > 1:
@@ -35,7 +31,6 @@ while 1:
   line = file.readline()
   if line:
     print line.strip('\n')
-    #print "size of line", len(line)
   else:
     time.sleep(1)
     file.seek(where)
