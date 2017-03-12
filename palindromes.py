@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import sys
 
 class Palindromes:
   def __init__(self, string):
@@ -9,7 +10,7 @@ class Palindromes:
   def findPalindromes(self):
     for idx, char in  enumerate(self.string):
 
-      self.palindromes_set.add(self.string[idx])
+#      self.palindromes_set.add(self.string[idx])
       start = idx - 1
       end = idx + 1
       while start >= 0 and end < len(self.string)  and  self.string[start] == self.string[end]:
@@ -31,5 +32,6 @@ def main(string):
   print p.findPalindromes()
 
 if __name__ == '__main__':
-  main('accaaccasasdfasdfqwretawfphqwefpoqwefqhfdfhdhdhhhffdygdfkdsafdfh')
+  string = sys.stdin.readlines()[0]
+  main(string)
 
