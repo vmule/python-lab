@@ -1,37 +1,25 @@
 #!/usr/bin/env python
 import sys
 
-class Palindromes:
-  def __init__(self, string):
-    self.string = string
-    print self.string
-    self.palindromes_set = set()
 
-  def findPalindromes(self):
-    for idx, char in  enumerate(self.string):
+def palindromes(text):
+    text = text.lower()
+    results = []
 
-#      self.palindromes_set.add(self.string[idx])
-      start = idx - 1
-      end = idx + 1
-      while start >= 0 and end < len(self.string)  and  self.string[start] == self.string[end]:
-        self.palindromes_set.add(self.string[start:end+1])
-        start -= 1
-        end += 1
+    for i in range(len(text)):
+        for j in range(0, i):
+            chunk = text[j:i + 1]
 
-      start = idx
-      end = idx + 1
-      while start >= 0 and end < len(self.string) and  self.string[start] == self.string[end]:
-        self.palindromes_set.add(self.string[start:end+1])
-        start -= 1
-        end += 1
+            if chunk == chunk[::-1]:
+                results.append(chunk)
 
-    return list(self.palindromes_set)
+    return results
+
 
 def main(string):
-  p = Palindromes(string)
-  print p.findPalindromes()
+    print palindromes(string)
+
 
 if __name__ == '__main__':
-  string = sys.stdin.readlines()[0]
-  main(string)
-
+    string = sys.stdin.readlines()[0]
+    main(string.strip())
