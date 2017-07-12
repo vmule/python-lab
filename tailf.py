@@ -28,7 +28,7 @@ class Tail(object):
       lines_found = blocks[-1].count('\n')
       lines_to_go -= lines_found
 
-    lines = ''.join(reversed(blocks))
+    lines = ''.join(blocks[::-1])
     return '\n'.join(lines.splitlines()[-wanted_lines:])
 
 
