@@ -1,39 +1,40 @@
-import time
-import os
+from __future__ import print_function
+import sys
 
-file = open('/home/vmule/file')
+class Tail(object):
 
-st_results = os.stat('/home/vmule/file')
-st_size = st_results[6]
-file.seek(st_size)
+  def __init__(self, path, lines=20):
+    self.lines = lines
+    self.path = path
 
-lines_num = 5
-buffer = 5
-position = st_size - buffer
+  def print_lines(self, block_size=1024):
 
-while lines_num > 1:
-  file.seek(position)
-  lines = file.readlines()
-  for i in lines:
-    if len(i) <= 1:
-      pass
-    elif lines_num > 1:
-      position -= len(i)
-      lines_num -= 1
-    else:
-      break
+    f = open(self.path)
+    f.seek(0,2)
+    blocks = []
+    block_end_byte = f.tell()
+    wanted_lines = self.lines
+    lines_to_go = self.lines
 
-file.seek(position)
+    while lines_to_go > 0 and block_end_byte > 0:
+      if (block_end_byte - block_size > 0):
+        f.seek(block_size, 1)
+        blocks.append(f.read(block_size))
 
-while 1:
-  where = file.tell()
-  #print where
-  line = file.readline()
-  if line:
-    print line.strip('\n')
-  else:
-    time.sleep(1)
-    file.seek(where)
+      else:
+        f.seek(0)
+        blocks.append(f.read(block_size))
+
+      lines_found = blocks[-1].count('\n')
+      lines_to_go -= lines_found
+
+    lines = ''.join(reversed(blocks))
+    return '\n'.join(lines.splitlines()[-wanted_lines:])
 
 
-  
+def main():
+  instance = Tail(sys.argv[1])
+  print(instance.print_lines())
+
+if __name__ == '__main__':
+  main()
