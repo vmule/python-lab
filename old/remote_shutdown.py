@@ -1,15 +1,17 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2.7
 
 import SimpleHTTPServer
 import SocketServer
 import subprocess
 
 # Set IP to your machine IP
+# Listening IP
 IP = '0.0.0.0'
 # Default port
 PORT = 2700
 
 class RequestHandler(SimpleHTTPServer.SimpleHTTPRequestHandler):
+  # GET Method
   def do_GET(self):
     if self.path == '/lazymode':
       self.send_response(200)

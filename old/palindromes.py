@@ -4,7 +4,7 @@ import sys
 class Palindromes:
   def __init__(self, string):
     self.string = string
-    print self.string
+#    print(self.string)
     self.palindromes_set = set()
 
   def findPalindromes(self):
@@ -25,11 +25,11 @@ class Palindromes:
         start -= 1
         end += 1
 
-    return list(self.palindromes_set)
+    return self.palindromes_set
 
 def main(string):
   p = Palindromes(string)
-  print p.findPalindromes()
+  print(p.findPalindromes())
 
 if __name__ == '__main__':
   string = sys.stdin.readlines()[0]
