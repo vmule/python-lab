@@ -3,6 +3,18 @@
 
 import llist
 
+class Node:
+    """
+    Double linked List node definition.
+    """
+
+
+    def __init__(self, data, key):
+        self.data = data
+        self.key = key
+        self.next_node = None
+        self.previous_node = None
+
 class LRUCache:
     """
     Least Recenet Used Cache implementation
